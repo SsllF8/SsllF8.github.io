@@ -136,13 +136,41 @@ a { color: inherit; }
   letter-spacing: 2px;
   margin-bottom: 24px;
 }
+.hero-role {
+  font-size: var(--text-heading-sm);
+  color: var(--color-ember);
+  margin-bottom: 16px;
+}
 .hero .bio {
   font-size: var(--text-body);
   color: var(--color-fog);
   margin-bottom: 24px;
-  max-width: 600px;
+  max-width: 680px;
 }
 .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; }
+
+/* ============ stats ============ */
+.stats {
+  display: flex;
+  gap: 48px;
+  flex-wrap: wrap;
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid var(--color-iron);
+}
+.stat-num {
+  display: block;
+  font-size: var(--text-heading-lg);
+  font-weight: 700;
+  line-height: 1.2;
+}
+.stat-label {
+  display: block;
+  font-size: var(--text-caption);
+  color: var(--color-steel);
+  text-transform: uppercase;
+  margin-top: 2px;
+}
 
 /* ============ section ============ */
 .section { margin-top: 64px; }
@@ -238,13 +266,17 @@ a { color: inherit; }
   gap: 16px;
 }
 .case-time { font-size: var(--text-caption); color: var(--color-steel); white-space: nowrap; }
+.case-links { display: flex; gap: 16px; flex-shrink: 0; }
 .case-link {
   font-size: 14px;
   color: var(--color-paper);
   text-decoration: underline;
   text-underline-offset: 4px;
+  white-space: nowrap;
 }
 .case-link:hover { color: var(--color-ember); }
+.case-link-live { color: var(--color-ember); }
+.case-link-live:hover { color: #f0733f; }
 
 /* 收尾卡：更多仓库 */
 .case-more {
@@ -278,6 +310,8 @@ a { color: inherit; }
   flex-wrap: wrap;
   gap: 8px;
 }
+.footer a { color: var(--color-fog); text-decoration: none; }
+.footer a:hover { color: var(--color-ember); }
 
 /* ============ responsive ============ */
 @media (max-width: 960px) {
@@ -293,6 +327,9 @@ a { color: inherit; }
   .case-more { padding: 0; }
   .case-more-link { padding: 24px; }
   .footer-inner { flex-direction: column; }
+  .stats { gap: 28px; }
+  .case-foot { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .case-links { gap: 16px; }
 }
 </style>
 </head>
@@ -317,10 +354,25 @@ a { color: inherit; }
 <header class="hero" id="top">
   <div class="container">
     <h1 class="hero-name">刘展博</h1>
-    <p class="bio">AI 应用开发工程师。半年从零独立做了 11 个开源项目：工作流引擎、评测平台、RAG 问答、数据分析工具。全部带测试、可复现，开源在 GitHub。</p>
+    <p class="hero-role">AI 应用开发工程师 · 上海</p>
+    <p class="bio">11 个月从零独立做了 11 个开源项目：DAG 工作流引擎、Agent 评测平台、RAG 问答、数据分析工具、SQL 引擎、离线 PWA。全部带自动化测试、容器可复现，源码公开在 GitHub。</p>
     <div class="hero-cta">
       <a class="btn btn-primary" href="#projects">查看项目 →</a>
       <a class="btn btn-ghost" href="https://github.com/SsllF8" target="_blank" rel="noopener">GitHub →</a>
+    </div>
+    <div class="stats">
+      <div>
+        <span class="stat-num">11</span>
+        <span class="stat-label">开源项目</span>
+      </div>
+      <div>
+        <span class="stat-num">267+</span>
+        <span class="stat-label">自动化测试</span>
+      </div>
+      <div>
+        <span class="stat-num">1</span>
+        <span class="stat-label">线上可访问</span>
+      </div>
     </div>
   </div>
 </header>
@@ -341,9 +393,9 @@ a { color: inherit; }
       <div class="stack-cell">ChromaDB<span>向量检索</span></div>
       <div class="stack-cell">SQLite<span>存储</span></div>
       <div class="stack-cell">pytest<span>测试</span></div>
-      <div class="stack-cell">Git / GitHub<span>协作</span></div>
-      <div class="stack-cell">Docker<span>部署</span></div>
-      <div class="stack-cell">Linux<span>环境</span></div>
+      <div class="stack-cell">Docker<span>容器化</span></div>
+      <div class="stack-cell">GitHub Actions<span>CI / 部署</span></div>
+      <div class="stack-cell">PWA · JS<span>前端交付</span></div>
     </div>
   </section>
 
@@ -352,6 +404,22 @@ a { color: inherit; }
     <div class="section-tag">// open source</div>
     <h2 class="section-title">开源项目</h2>
     <div class="case-grid">
+
+      <article class="case-card">
+        <div class="case-tag">Workflow Engine</div>
+        <h3 class="case-title">agentflow — DAG 工作流编排引擎</h3>
+        <p class="case-desc">把原来的线性管道重写成真正的有向无环图调度器：Kahn 算法拓扑排序、构造期环检测并定位具体环路、多分支汇聚、同层节点线程池并发、节点级断点续跑。16 类节点，零外部工作流框架依赖。</p>
+        <div class="case-use">
+          <span class="case-use-label">使用场景</span>
+          <p>把"抓取网页 → AI 提炼 → 生成日报"这类重复劳动编排成一张图；中间某个节点崩了，重跑只跑这一支，不用从头再来。</p>
+        </div>
+        <div class="case-foot">
+          <span class="case-time">2026.09 · 19 tests · Docker 一键运行</span>
+          <span class="case-links">
+            <a class="case-link" href="https://github.com/SsllF8/agentflow" target="_blank" rel="noopener">查看源码 →</a>
+          </span>
+        </div>
+      </article>
 
       <article class="case-card">
         <div class="case-tag">Evaluation</div>
@@ -363,35 +431,26 @@ a { color: inherit; }
         </div>
         <div class="case-foot">
           <span class="case-time">2026.09 · 82 tests</span>
-          <a class="case-link" href="https://github.com/SsllF8/floweval" target="_blank" rel="noopener">查看源码 →</a>
+          <span class="case-links">
+            <a class="case-link" href="https://github.com/SsllF8/floweval" target="_blank" rel="noopener">查看源码 →</a>
+          </span>
         </div>
       </article>
 
       <article class="case-card">
-        <div class="case-tag">Workflow</div>
-        <h3 class="case-title">AI 工作流自动化平台</h3>
-        <p class="case-desc">可视化拖拽编排 AI 工作流：DAG 引擎调度，内置 AI 节点、HTTP、分支、循环等 9 种类型，DeepSeek 驱动，支持保存复用。</p>
+        <div class="case-tag">PWA · 本人每天在用</div>
+        <h3 class="case-title">jobpipe — 求职作战台</h3>
+        <p class="case-desc">无服务端的求职投递管理工具：手机装到桌面即可离线使用，岗位打分纯规则实现、零 AI 调用，四维加权结果可解释。GitHub Actions 自动部署到 Pages，含 Playwright 真浏览器端到端验证。</p>
         <div class="case-use">
           <span class="case-use-label">使用场景</span>
-          <p>把"抓取网页 → AI 提炼 → 生成日报"这类重复劳动，拖成一条自动化流水线，按点触发。</p>
+          <p>投了 20 家公司之后记不住谁回了、该跟进谁 —— 打开就看到今天要做的事，S 级岗位才配一份自荐信。</p>
         </div>
         <div class="case-foot">
-          <span class="case-time">2026.01 – 09</span>
-          <a class="case-link" href="https://github.com/SsllF8/agentflow" target="_blank" rel="noopener">查看源码 →</a>
-        </div>
-      </article>
-
-      <article class="case-card">
-        <div class="case-tag">RAG</div>
-        <h3 class="case-title">企业知识库问答系统</h3>
-        <p class="case-desc">上传公司文档（PDF、Word），AI 根据文档内容自动回答问题，适合企业内部知识库与产品问答助手。</p>
-        <div class="case-use">
-          <span class="case-use-label">使用场景</span>
-          <p>把公司内部文档丢进去，员工用自然语言提问，答案附带原文出处，不用再翻手册。</p>
-        </div>
-        <div class="case-foot">
-          <span class="case-time">2025.10 – 11</span>
-          <a class="case-link" href="https://github.com/SsllF8/enterprise-rag-qa" target="_blank" rel="noopener">查看源码 →</a>
+          <span class="case-time">2026.09 · 166 tests · 线上已部署</span>
+          <span class="case-links">
+            <a class="case-link case-link-live" href="https://ssllf8.github.io/jobpipe/" target="_blank" rel="noopener">在线体验 →</a>
+            <a class="case-link" href="https://github.com/SsllF8/jobpipe" target="_blank" rel="noopener">查看源码 →</a>
+          </span>
         </div>
       </article>
 
@@ -405,7 +464,25 @@ a { color: inherit; }
         </div>
         <div class="case-foot">
           <span class="case-time">2025.12 – 2026.01</span>
-          <a class="case-link" href="https://github.com/SsllF8/ai-customer-service" target="_blank" rel="noopener">查看源码 →</a>
+          <span class="case-links">
+            <a class="case-link" href="https://github.com/SsllF8/ai-customer-service" target="_blank" rel="noopener">查看源码 →</a>
+          </span>
+        </div>
+      </article>
+
+      <article class="case-card">
+        <div class="case-tag">RAG</div>
+        <h3 class="case-title">企业知识库问答系统</h3>
+        <p class="case-desc">上传公司文档（PDF、Word），AI 根据文档内容自动回答问题，适合企业内部知识库与产品问答助手。</p>
+        <div class="case-use">
+          <span class="case-use-label">使用场景</span>
+          <p>把公司内部文档丢进去，员工用自然语言提问，答案附带原文出处，不用再翻手册。</p>
+        </div>
+        <div class="case-foot">
+          <span class="case-time">2025.10 – 11</span>
+          <span class="case-links">
+            <a class="case-link" href="https://github.com/SsllF8/enterprise-rag-qa" target="_blank" rel="noopener">查看源码 →</a>
+          </span>
         </div>
       </article>
 
@@ -419,7 +496,9 @@ a { color: inherit; }
         </div>
         <div class="case-foot">
           <span class="case-time">2025.11 – 12</span>
-          <a class="case-link" href="https://github.com/SsllF8/ai-data-analyzer" target="_blank" rel="noopener">查看源码 →</a>
+          <span class="case-links">
+            <a class="case-link" href="https://github.com/SsllF8/ai-data-analyzer" target="_blank" rel="noopener">查看源码 →</a>
+          </span>
         </div>
       </article>
 
@@ -433,7 +512,9 @@ a { color: inherit; }
         </div>
         <div class="case-foot">
           <span class="case-time">2026.02 – 03</span>
-          <a class="case-link" href="https://github.com/SsllF8/sql-query-engine" target="_blank" rel="noopener">查看源码 →</a>
+          <span class="case-links">
+            <a class="case-link" href="https://github.com/SsllF8/sql-query-engine" target="_blank" rel="noopener">查看源码 →</a>
+          </span>
         </div>
       </article>
 
@@ -447,15 +528,17 @@ a { color: inherit; }
         </div>
         <div class="case-foot">
           <span class="case-time">2026.03 – 04</span>
-          <a class="case-link" href="https://github.com/SsllF8/task-queue-engine" target="_blank" rel="noopener">查看源码 →</a>
+          <span class="case-links">
+            <a class="case-link" href="https://github.com/SsllF8/task-queue-engine" target="_blank" rel="noopener">查看源码 →</a>
+          </span>
         </div>
       </article>
 
       <article class="case-card case-more">
         <a class="case-more-link" href="https://github.com/SsllF8?tab=repositories" target="_blank" rel="noopener">
           <div class="case-tag">More</div>
-          <h3 class="case-title">还有 4 个仓库</h3>
-          <p class="case-desc">岗位差距分析、AI 求职助手、AI 报告生成器等，都在 GitHub 上，含 README 与可运行 demo。</p>
+          <h3 class="case-title">还有 3 个仓库</h3>
+          <p class="case-desc">岗位差距分析、AI 求职助手、AI 报告生成器，都在 GitHub 上，含 README 与可运行 demo。</p>
           <div class="case-foot">
             <span class="case-time">github.com/SsllF8</span>
             <span class="case-link">查看全部 →</span>
@@ -470,7 +553,7 @@ a { color: inherit; }
 
 <footer class="footer">
   <div class="footer-inner">
-    <span>© 2026 刘展博</span>
+    <span>© 2026 刘展博 · <a href="mailto:924899361@qq.com">924899361@qq.com</a></span>
     <span>~/github $ exit 0</span>
   </div>
 </footer>
